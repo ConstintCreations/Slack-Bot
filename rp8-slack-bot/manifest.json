@@ -22,6 +22,11 @@
         "command": "/cast",
         "description": "Cast your rod!",
         "should_escape": false
+      },
+      {
+        "command": "/reel",
+        "description": "Reel in your fish!",
+        "should_escape": false
       }
     ]
   },

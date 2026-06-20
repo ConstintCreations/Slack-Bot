@@ -34,15 +34,19 @@ def cast_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Res
                 return
             
             if random.random() > 0.5:
-                say(f"A fish is tugging at <@{user_id}>'s line! Use /catch")
+                say(f"A fish is tugging at <@{user_id}>'s line! Reel it in!")
             else:
-                say(f"A fish is biting for <@{user_id}>! Use /catch")
+                say(f"A fish is biting for <@{user_id}>! Reel it in!")
+            data[user_id]["has_bite"] = True
+            save_data(data)
 
             time.sleep(3)
-            # fish not caught
-            say(F"<@{user_id}>'s fish got away!")
-            data[user_id]["casted"] = False
-            save_data(data)
+            data = load_data()
+            if data[user_id]["has_bite"]:
+                say(F"<@{user_id}>'s fish got away!")
+                data[user_id]["casted"] = False
+                data[user_id]["has_bite"] = False
+                save_data(data)
 
         threading.Thread(target=delay_bite).start()
 
