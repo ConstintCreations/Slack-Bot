@@ -16,18 +16,11 @@
       "display_name": "rp8-slack-bot",
       "always_online": true
     },
-    "shortcuts": [
-      {
-        "name": "Run sample shortcut",
-        "type": "global",
-        "callback_id": "sample_shortcut_id",
-        "description": "Runs a sample shortcut"
-      }
-    ],
+    "shortcuts": [],
     "slash_commands": [
       {
-        "command": "/sample-command",
-        "description": "Runs a sample command",
+        "command": "/cast",
+        "description": "Cast your rod!",
         "should_escape": false
       }
     ]
@@ -44,8 +37,6 @@
   "settings": {
     "event_subscriptions": {
       "bot_events": [
-        "app_home_opened",
-        "message.channels"
       ]
     },
     "interactivity": {

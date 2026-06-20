@@ -1,6 +1,6 @@
 from slack_bolt import App
-from .sample_command import sample_command_callback
+from .cast_command import cast_command
 
 
 def register(app: App):
-    app.command("/sample-command")(sample_command_callback)
+    app.command("/cast")(cast_command)
