@@ -164,68 +164,74 @@
             }
         }
     },
-    "rods":     {
-        "Common": {
+    "rods": [
+        {
+            "rarity": "Common",
             "secret_chance": 0,
             "chances": {
-                "common": 0.75,
-                "uncommon": 0.2,
-                "rare": 0.05,
-                "epic": 0,
-                "legendary": 0
+                "Common": 0.75,
+                "Uncommon": 0.2,
+                "Rare": 0.05,
+                "Epic": 0,
+                "Legendary": 0
             }
         },
-        "Uncommon": {
+        {
+            "rarity": "Uncommon",
             "secret_chance": 0.0001,
             "chances": {
-                "common": 0.15,
-                "uncommon": 0.65,
-                "rare": 0.15,
-                "epic": 0.05,
-                "legendary": 0
+                "Common": 0.15,
+                "Uncommon": 0.65,
+                "Rare": 0.15,
+                "Epic": 0.05,
+                "Legendary": 0
             }
         },
-        "Rare": {
+        {
+            "rarity": "Rare",
             "secret_chance": 0.001,
             "chances": {
-                "common": 0.05,
-                "uncommon": 0.15,
-                "rare": 0.6,
-                "epic": 0.15,
-                "legendary": 0.05
+                "Common": 0.05,
+                "Uncommon": 0.15,
+                "Rare": 0.6,
+                "Epic": 0.15,
+                "Legendary": 0.05
             }
         },
-        "Epic": {
+        {
+            "rarity": "Epic",
             "secret_chance": 0.005,
             "chances": {
-                "common": 0.01,
-                "uncommon": 0.04,
-                "rare": 0.2,
-                "epic": 0.6,
-                "legendary": 0.15
+                "Common": 0.01,
+                "Uncommon": 0.04,
+                "Rare": 0.2,
+                "Epic": 0.6,
+                "Legendary": 0.15
             }
         },
-        "Legendary": {
+        {
+            "rarity": "Legendary",
             "secret_chance": 0.05,
             "chances": {
-                "common": 0.005,
-                "uncommon": 0.02,
-                "rare": 0.075,
-                "epic": 0.2,
-                "legendary": 0.7
+                "Common": 0.005,
+                "Uncommon": 0.02,
+                "Rare": 0.075,
+                "Epic": 0.2,
+                "Legendary": 0.7
             }
         },
-        "Secret": {
+        {
+            "rarity": "Secret",
             "secret_chance": 0.25,
             "chances": {
-                "common": 0.001,
-                "uncommon": 0.009,
-                "rare": 0.015,
-                "epic": 0.075,
-                "legendary": 0.9
+                "Common": 0.001,
+                "Uncommon": 0.009,
+                "Rare": 0.015,
+                "Epic": 0.075,
+                "Legendary": 0.9
             }
         }
-    },
+    ],
     "upgrades": {
         "rod_upgrade": {
             "name": "Rod Upgrade",
@@ -243,7 +249,7 @@
             "base_price": 15,
             "price_multiplier": 2.25,
             "base_value": 0,
-            "value_per_upgrade": 0.01
+            "value_per_upgrade": 0.02
         },
         "secret_luck": {
             "name": "Secret Luck",
@@ -295,6 +301,15 @@
             "description": "Automatically cast your rod",
             "max": 1,
             "base_price": 30000,
+            "price_multiplier": 0,
+            "base_value": 0,
+            "value_per_upgrade": 1
+        },
+        "autosell": {
+            "name": "Autosell",
+            "description": "Automatically sell your fish",
+            "max": 1,
+            "base_price": 1000000,
             "price_multiplier": 0,
             "base_value": 0,
             "value_per_upgrade": 1

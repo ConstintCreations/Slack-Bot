@@ -11,21 +11,18 @@ def cast_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Res
 
         data = load_data()
 
-        if user_id not in data:
-            data[user_id] = {}
-
         if data[user_id].get("casted"):
             respond("Your line is already cast!")
             return
         
-        say(f"<@{user_id}> casted their line...")
+        respond("You cast your line...")
 
         data[user_id]["casted"] = True
 
         save_data(data)
 
         def delay_bite():
-            time.sleep(5)
+            time.sleep(random.gauss(5, 1))
 
             data = load_data()
             user = data.get(user_id, {})
@@ -34,16 +31,16 @@ def cast_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Res
                 return
             
             if random.random() > 0.5:
-                say(f"A fish is tugging at <@{user_id}>'s line! Reel it in!")
+                respond("A fish is tugging at your line! Reel it in!")
             else:
-                say(f"A fish is biting for <@{user_id}>! Reel it in!")
+                respond("A fish is biting! Reel it in!")
             data[user_id]["has_bite"] = True
             save_data(data)
 
             time.sleep(3)
             data = load_data()
             if data[user_id]["has_bite"]:
-                say(F"<@{user_id}>'s fish got away!")
+                respond("The fish got away!")
                 data[user_id]["casted"] = False
                 data[user_id]["has_bite"] = False
                 save_data(data)

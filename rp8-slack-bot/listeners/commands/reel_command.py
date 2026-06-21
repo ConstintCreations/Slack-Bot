@@ -10,17 +10,55 @@ def reel_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Res
         user_id = body["user_id"]
         data = load_data()
 
-        if user_id not in data:
-            data[user_id] = {}
+        user = data[user_id]
 
-        if data[user_id].get("casted") and data[user_id]["has_bite"]:
+        if user.get("casted") and user["has_bite"]:
 
             definitions = DEFINITIONS
+            user_rod = definitions["rods"][user["upgrades"]["rod_upgrade"]]
             fish_list = definitions["fish"]
-            rarity = random.choice(list(fish_list.keys()))
-            fish = random.choice(list(fish_list[rarity].keys()))
-            
-            say(f"<@{user_id}> caught a [{rarity}] {fish}!")
+            if random.random() <= user_rod["secret_chance"] + user["upgrades"]["secret_luck"]:
+                rarity = "Secret"
+            else:
+                rarity = random.choices(list(user_rod["chances"].keys()),list(user_rod["chances"].values()), k=1)[0]
+            fish_name = random.choice(list(fish_list[rarity].keys()))
+            fish = fish_list[rarity][fish_name]
+
+            weight = random.gauss(fish["avg_weight"], fish["avg_weight"]/2) + (fish["avg_weight"] * (user["upgrades"]["luck"] + user["upgrades"]["rod_upgrade"] * 0.1))
+            if weight <= 0.1:
+                weight = 0.1
+            round_weight = round(weight, 1)
+
+            proportional_weight = weight/fish["avg_weight"]
+            if proportional_weight <= 0.25:
+                fish_size = " Microscopic"
+            elif proportional_weight <= 0.5:
+                fish_size = " Tiny"
+            elif proportional_weight <= 0.85:
+                fish_size = " Small"
+            elif proportional_weight <= 1.15:
+                fish_size = "n Average"
+            elif proportional_weight <= 1.5:
+                fish_size = " Large"
+            elif proportional_weight <= 2:
+                fish_size = " Huge"
+            elif proportional_weight <= 3:
+                fish_size = " GIANT"
+            elif proportional_weight <= 5:
+                fish_size = " MASSIVE"
+            elif proportional_weight <= 7.5:
+                fish_size = " COLOSSAL"
+            elif proportional_weight <= 10:
+                fish_size = " BEGEMOTH"
+            elif proportional_weight <= 25:
+                fish_size = " LEVIATHAN"
+            else:
+                fish_size = "n ABYSSAL"
+
+            value = fish["base_value"] + fish["weight_multiplier"]*weight
+            value = round(value, 1)
+
+            say(f"<@{user_id}> caught a{fish_size} {round_weight} lb. [{rarity.upper()}] {fish_name}! (${value})")
 
             data[user_id]["casted"] = False
             data[user_id]["has_bite"] = False
