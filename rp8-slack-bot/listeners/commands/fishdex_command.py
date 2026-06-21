@@ -21,6 +21,7 @@ def fishdex_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: 
                     break
             else:
                 respond("User could not be found or has not played.")
+                return
         all_rarities = ["Common", "Uncommon", "Rare", "Epic", "Legendary", "Secret"]
 
         fish = data[target_user_id]["best_fish"]
@@ -45,7 +46,7 @@ def fishdex_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: 
         else:
             all_secret_fish_found = False
 
-        message = f"{"Your"if target_user_id == user_id else f"{data[target_user_id]["username"]}'s"} Fishdex:\n\nBest Catch: {f"{fish["size"]} {fish["weight"]} lb. [{fish["rarity"]}] {fish["name"]} (${fish["value"]})" if fish else "None"}\nFish Caught: {data[target_user_id]["fish_caught"]}\n"
+        message = f"{"Your" if target_user_id == user_id else f"{data[target_user_id]["username"]}'s"} Fishdex:\n\nBest Catch: {f"{fish["size"]} {fish["weight"]} lb. [{fish["rarity"]}] {fish["name"]} (${fish["value"]})" if fish else "None"}\nFish Caught: {data[target_user_id]["fish_caught"]}\n"
 
         if all_secret_fish_found:
             message += f"Fish Found: {fish_found_count}/{total_count}\n"

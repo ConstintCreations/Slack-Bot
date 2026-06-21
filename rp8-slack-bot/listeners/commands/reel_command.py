@@ -58,8 +58,6 @@ def reel_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Res
             value = fish["base_value"] + fish["weight_multiplier"]*weight
             value = round(value, 1)
 
-            say(f"<@{user_id}> caught a{"n" if fish_size[0] == 'A' else ""} {fish_size} {round_weight} lb. [{rarity.upper()}] {fish_name}! (${value})")
-
             fish_data = {
                 "rarity": rarity.upper(),
                 "name": fish_name,
@@ -68,10 +66,15 @@ def reel_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Res
                 "value": value
             }
 
+            if not(data[user_id]["best_fish"].get("value")) or fish_data["value"] > data[user_id]["best_fish"]["value"]:
+                data[user_id]["best_fish"] = fish_data
+                message = client.chat_postMessage(channel = body["channel_id"], text=f"NEW BEST! <@{user_id}> caught a{"n" if fish_size[0] == 'A' else ""} {fish_size} {round_weight} lb. [{rarity.upper()}] {fish_name}! (${value})")
+                client.reactions_add(channel=body["channel_id"], timestamp=message["ts"], name="trophy")
+            else:
+                respond(f"You caught a{"n" if fish_size[0] == 'A' else ""} {fish_size} {round_weight} lb. [{rarity.upper()}] {fish_name}! (${value})")
+
             data[user_id]["inventory"].append(fish_data)
             data[user_id]["fish_caught"] = data[user_id]["fish_caught"] + 1
-            if not(data[user_id]["best_fish"].get("value")) or fish_data["value"] > data[user_id]["best_fish"]["value"]:
-               data[user_id]["best_fish"] = fish_data
             data[user_id]["fishdex"][rarity][fish_name] = True
 
             data[user_id]["casted"] = False

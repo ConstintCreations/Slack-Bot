@@ -47,7 +47,7 @@
         "channels:history",
         "chat:write",
         "commands",
-        "users:read"
+        "reactions:write"
       ]
     }
   },
