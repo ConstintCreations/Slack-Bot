@@ -266,7 +266,7 @@
             "max": 50,
             "base_price": 15,
             "price_multiplier": 1.5,
-            "base_value": 1,
+            "base_value": 0,
             "value_per_upgrade": 0.2
         },
         "autoreel": {
@@ -284,7 +284,7 @@
             "max": 10,
             "base_price": 30,
             "price_multiplier": 3.5,
-            "base_value": 20,
+            "base_value": 0,
             "value_per_upgrade": -1.5
         },
         "boat_size": {
@@ -293,7 +293,7 @@
             "max": 50,
             "base_price": 15,
             "price_multiplier": 2.25,
-            "base_value": 1,
+            "base_value": 0,
             "value_per_upgrade": 1 
         },
         "autocast": {

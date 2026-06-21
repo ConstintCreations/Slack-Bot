@@ -36,7 +36,12 @@
       {
         "command": "/fishdex",
         "description": "View your caught fish!",
-        "usage_hint": "@User",
+        "usage_hint": "User",
+        "should_escape": false
+      },
+      {
+        "command": "/shop",
+        "description": "Opens the shop!",
         "should_escape": false
       }
     ]

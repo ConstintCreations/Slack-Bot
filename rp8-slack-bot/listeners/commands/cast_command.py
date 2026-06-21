@@ -15,7 +15,7 @@ def cast_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Res
             respond("Your line is already cast!")
             return
         
-        if len(data[user_id]["inventory"]) >= data[user_id]["upgrades"]["boat_size"]:
+        if len(data[user_id]["inventory"]) >= data[user_id]["upgrades"]["boat_size"] + 1:
             respond("It looks like your boat is already full of fish! Sell your haul or increase your boat size to continue casting.")
             return
         
