@@ -296,20 +296,11 @@
             "base_value": 0,
             "value_per_upgrade": 1 
         },
-        "autocast": {
-            "name": "Autocast",
-            "description": "Automatically cast your rod",
-            "max": 1,
-            "base_price": 30000,
-            "price_multiplier": 0,
-            "base_value": 0,
-            "value_per_upgrade": 1
-        },
         "autosell": {
             "name": "Autosell",
             "description": "Automatically sell your fish",
             "max": 1,
-            "base_price": 1000000,
+            "base_price": 75000,
             "price_multiplier": 0,
             "base_value": 0,
             "value_per_upgrade": 1

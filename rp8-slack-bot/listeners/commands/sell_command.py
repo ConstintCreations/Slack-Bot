@@ -19,7 +19,8 @@ def sell_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Res
         for fish in data[user_id]["inventory"]:
             message += f"    {fish["size"]} {fish["weight"]} lb. [{fish["rarity"]}] {fish["name"]} = ${fish["value"]}\n"
             total += fish["value"]
-        message += f"For a total of ${round(total, 1)}! You now have ${data[user_id]["money"] + total}"
+        total = round(total, 1)
+        message += f"For a total of ${total}! You now have ${data[user_id]["money"] + total}"
         respond(message)
 
         data[user_id]["money"] = data[user_id]["money"] + total
