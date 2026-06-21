@@ -1,0 +1,74 @@
+{
+    "rod_upgrade": {
+        "name": "Rod Upgrade",
+        "description": "Upgrades your rod to give you better chances at higher-tiered fish",
+        "max": 5,
+        "base_price": 100,
+        "price_multiplier": 15,
+        "base_value": 0,
+        "value_per_upgrade": 1
+    },
+    "luck": {
+        "name": "Luck",
+        "description": "Increases your chance of finding heavier fish",
+        "max": 50,
+        "base_price": 15,
+        "price_multiplier": 2.25,
+        "base_value": 0,
+        "value_per_upgrade": 0.01
+    },
+    "secret_luck": {
+        "name": "Secret Luck",
+        "description": "Increases your chance of finding secret fish",
+        "max": 25,
+        "base_price": 1250,
+        "price_multiplier": 2.5,
+        "base_value": 0,
+        "value_per_upgrade": 0.01
+    },
+    "time_to_catch": {
+        "name": "Time to Reel",
+        "description": "Increases the window of time you have to reel your rod",
+        "max": 50,
+        "base_price": 15,
+        "price_multiplier": 1.5,
+        "base_value": 1,
+        "value_per_upgrade": 0.2
+    },
+    "autoreel": {
+        "name": "Autoreel",
+        "description": "Automatically reel in your rod",
+        "max": 1,
+        "base_price": 750,
+        "price_multiplier": 0,
+        "base_value": 0,
+        "value_per_upgrade": 1
+    },
+    "average_bite_time": {
+        "name": "Average bite time",
+        "description": "Decreases the average amount of time before a fish bites",
+        "max": 10,
+        "base_price": 30,
+        "price_multiplier": 3.5,
+        "base_value": 20,
+        "value_per_upgrade": -1.5
+    },
+    "boat_size": {
+        "name": "Boat Size",
+        "description": "Carry more fish at once",
+        "max": 50,
+        "base_price": 15,
+        "price_multiplier": 2.25,
+        "base_value": 1,
+        "value_per_upgrade": 1 
+    },
+    "autocast": {
+        "name": "Autocast",
+        "description": "Automatically cast your rod",
+        "max": 1,
+        "base_price": 30000,
+        "price_multiplier": 0,
+        "base_value": 0,
+        "value_per_upgrade": 1
+    }
+}
