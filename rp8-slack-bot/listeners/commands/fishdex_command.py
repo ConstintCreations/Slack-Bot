@@ -8,22 +8,34 @@ def fishdex_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: 
     try:
         ack()
         user_id = body["user_id"]
+        data = load_data()
+
+        text = body["text"].strip()
+        if text == "":
+            target_user_id = user_id
+        else:
+            text = text.lstrip("@")
+            for user, values in data.items():
+                if values["username"].lower() == text.lower():
+                    target_user_id = user
+                    break
+            else:
+                respond("User could not be found or has not played.")
         all_rarities = ["Common", "Uncommon", "Rare", "Epic", "Legendary", "Secret"]
 
-        data = load_data()
-        fish = data[user_id]["best_fish"]
+        fish = data[target_user_id]["best_fish"]
 
         fish_found_count = 0
         total_count = 0
         for rarity in all_rarities:
-            for _, value in data[user_id]["fishdex"][rarity].items():
+            for _, value in data[target_user_id]["fishdex"][rarity].items():
                 if value:
                     fish_found_count += 1
                 total_count += 1
 
         secret_fish_found = {}
         total_secret_fish = 0
-        for secret_fish, value in data[user_id]["fishdex"]["Secret"].items():
+        for secret_fish, value in data[target_user_id]["fishdex"]["Secret"].items():
             if value:
                 secret_fish_found[secret_fish] = value
             total_secret_fish += 1
@@ -33,7 +45,7 @@ def fishdex_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: 
         else:
             all_secret_fish_found = False
 
-        message = f"Your Fishdex:\n\nBest Catch: {fish["size"]} {fish["weight"]} lb. [{fish["rarity"]}] {fish["name"]} (${fish["value"]})\nFish Caught: {data[user_id]["fish_caught"]}\n"
+        message = f"{"Your"if target_user_id == user_id else f"{data[target_user_id]["username"]}'s"} Fishdex:\n\nBest Catch: {f"{fish["size"]} {fish["weight"]} lb. [{fish["rarity"]}] {fish["name"]} (${fish["value"]})" if fish else "None"}\nFish Caught: {data[target_user_id]["fish_caught"]}\n"
 
         if all_secret_fish_found:
             message += f"Fish Found: {fish_found_count}/{total_count}\n"
@@ -43,7 +55,7 @@ def fishdex_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: 
         for rarity in all_rarities:
             message += f"{rarity}:\n"
             if rarity != "Secret" or all_secret_fish_found:
-                for fish, value in data[user_id]["fishdex"][rarity].items():
+                for fish, value in data[target_user_id]["fishdex"][rarity].items():
                     message += f"   {fish} - {"CAUGHT" if value else "UNCAUGHT"}\n"
             else:
                 for fish, value in secret_fish_found.items():

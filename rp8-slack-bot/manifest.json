@@ -36,6 +36,7 @@
       {
         "command": "/fishdex",
         "description": "View your caught fish!",
+        "usage_hint": "@User",
         "should_escape": false
       }
     ]
@@ -45,7 +46,8 @@
       "bot": [
         "channels:history",
         "chat:write",
-        "commands"
+        "commands",
+        "users:read"
       ]
     }
   },

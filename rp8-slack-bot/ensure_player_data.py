@@ -3,6 +3,7 @@ from data import save_data, load_data, DEFINITIONS
 def ensure_player_data():
     def middleware(context, body, next, logger):
         user_id = body.get("user_id")
+        username = body.get("user_name", "")
 
         if not user_id:
             return next()
@@ -18,6 +19,7 @@ def ensure_player_data():
                 for fish_name in fish_list:
                     base_fishdex[rarity][fish_name] = False
             data[user_id] = {
+                "username": username,
                 "money": 0,
                 "inventory": [],
                 "upgrades": base_upgrades,
