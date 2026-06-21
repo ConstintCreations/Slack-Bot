@@ -1,16 +1,29 @@
-from slack_bolt import Ack, Say, Respond
+from slack_bolt import Ack
 from slack_sdk import WebClient
 from logging import Logger
-import time, threading, random
 from data import save_data, load_data, DEFINITIONS
 
-def shop_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Respond, logger: Logger):
+def buy_upgrade_action(ack: Ack, body: dict, client: WebClient, logger: Logger):
     try:
         ack()
-        user_id = body["user_id"]
+        user_id = body["user"]["id"]
+        view_id = body["view"]["id"]
         data = load_data()
         user = data[user_id]
         definitions = DEFINITIONS
+
+        upgrade_key, price = body["actions"][0]["value"].split("|")
+
+        owned = user["upgrades"][upgrade_key]
+        max = definitions["upgrades"][upgrade_key]["max"]
+
+        bought = False
+
+        if user["money"] >= int(price) and owned <= max:
+            user["money"] = user["money"] - int(price)
+            user["upgrades"][upgrade_key] = user["upgrades"][upgrade_key] + 1
+            bought = True
+            save_data(data)
 
         blocks = []
 
@@ -26,8 +39,8 @@ def shop_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Res
             blocks.append({"type": "divider"})
             blocks.append(upgrade_block)
 
-        data = load_data()
-        client.views_open(
+        client.views_update(
+            view_id=view_id,
             trigger_id=body["trigger_id"],
             view={
                 "type": "modal",
@@ -36,7 +49,6 @@ def shop_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Res
                 "blocks": blocks
             }
         )
-        save_data(data)
 
     except Exception as e:
         logger.error(e)
