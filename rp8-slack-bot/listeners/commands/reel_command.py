@@ -72,6 +72,7 @@ def reel_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Res
             data[user_id]["fish_caught"] = data[user_id]["fish_caught"] + 1
             if not(data[user_id]["best_fish"].get("value")) or fish_data["value"] > data[user_id]["best_fish"]["value"]:
                data[user_id]["best_fish"] = fish_data
+            data[user_id]["fishdex"][rarity][fish_name] = True
 
             data[user_id]["casted"] = False
             data[user_id]["has_bite"] = False

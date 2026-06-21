@@ -32,6 +32,11 @@
         "command": "/sell",
         "description": "Sell your haul!",
         "should_escape": false
+      },
+      {
+        "command": "/fishdex",
+        "description": "View your caught fish!",
+        "should_escape": false
       }
     ]
   },
