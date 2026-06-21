@@ -19,7 +19,7 @@ def buy_upgrade_action(ack: Ack, body: dict, client: WebClient, logger: Logger):
 
         bought = False
 
-        if user["money"] >= int(price) and owned <= max:
+        if user["money"] >= int(price) and owned < max:
             user["money"] = user["money"] - int(price)
             user["upgrades"][upgrade_key] = user["upgrades"][upgrade_key] + 1
             bought = True
