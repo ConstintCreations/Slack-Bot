@@ -2,7 +2,7 @@ from slack_bolt import Ack, Say, Respond
 from slack_sdk import WebClient
 from logging import Logger
 import time, threading, random
-from data import save_data, load_data
+from data import save_data, load_data, DEFINITIONS
 
 def reel_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Respond, logger: Logger):
     try:
@@ -14,7 +14,14 @@ def reel_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Res
             data[user_id] = {}
 
         if data[user_id].get("casted") and data[user_id]["has_bite"]:
-            say(f"<@{user_id}> caught a fish!")
+
+            definitions = DEFINITIONS
+            fish_list = definitions["fish"]
+            rarity = random.choice(list(fish_list.keys()))
+            fish = random.choice(list(fish_list[rarity].keys()))
+            
+            say(f"<@{user_id}> caught a [{rarity}] {fish}!")
+
             data[user_id]["casted"] = False
             data[user_id]["has_bite"] = False
         elif data[user_id].get("casted"):

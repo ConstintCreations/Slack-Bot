@@ -1,0 +1,303 @@
+{
+    "fish": {
+        "Common": {
+            "Perch": {
+                "base_value": 3,
+                "avg_weight": 1.2,
+                "weight_multiplier": 1.5
+            },
+            "Bluegill": {
+                "base_value": 4,
+                "avg_weight": 3,
+                "weight_multiplier": 1
+            },
+            "Guppy": {
+                "base_value": 1,
+                "avg_weight": 0.5,
+                "weight_multiplier": 1
+            },
+            "Shrimp": {
+                "base_value": 8,
+                "avg_weight": 2,
+                "weight_multiplier": 0.5
+            },
+            "Crappie": {
+                "base_value": 1.5,
+                "avg_weight": 1.5,
+                "weight_multiplier": 1.5
+            }
+        },
+        "Uncommon": {
+            "Flounder": {
+                "base_value": 7,
+                "avg_weight": 12,
+                "weight_multiplier": 4
+            },
+            "Carp": {
+                "base_value": 6,
+                "avg_weight": 18,
+                "weight_multiplier": 3.5
+            },
+            "Walleye": {
+                "base_value": 15,
+                "avg_weight": 8,
+                "weight_multiplier": 5
+            },
+            "Pike": {
+                "base_value": 20,
+                "avg_weight": 10,
+                "weight_multiplier": 3
+            },
+            "Cod": {
+                "base_value": 18,
+                "avg_weight": 12,
+                "weight_multiplier": 3.5
+            }
+        },
+        "Rare": {
+            "Mackrel": {
+                "base_value": 40,
+                "avg_weight": 12,
+                "weight_multiplier": 6
+            },
+            "Bass": {
+                "base_value": 52,
+                "avg_weight": 22,
+                "weight_multiplier": 5
+            },
+            "Catfish": {
+                "base_value": 36,
+                "avg_weight": 18,
+                "weight_multiplier": 3
+            },
+            "Trout": {
+                "base_value": 100,
+                "avg_weight": 30,
+                "weight_multiplier": 2
+            },
+            "Salmon": {
+                "base_value": 20,
+                "avg_weight": 30,
+                "weight_multiplier": 5
+            }
+        },
+        "Epic": {
+            "Swordfish": {
+                "base_value": 300,
+                "avg_weight": 150,
+                "weight_multiplier": 2
+            },
+            "Bluefin Tuna": {
+                "base_value": 100,
+                "avg_weight": 15,
+                "weight_multiplier": 20
+            },
+            "Grouper": {
+                "base_value": 150,
+                "avg_weight": 20,
+                "weight_multiplier": 3
+            },
+            "Hammerhead Shark": {
+                "base_value": 250,
+                "avg_weight": 400,
+                "weight_multiplier": 1.5
+            },
+            "Sailfish": {
+                "base_value": 120,
+                "avg_weight": 100,
+                "weight_multiplier": 2
+            }
+        },
+        "Legendary":
+        {
+            "Stingray": {
+                "base_value": 600,
+                "avg_weight": 20,
+                "weight_multiplier": 3
+            },
+            "Sturgeon": {
+                "base_value": 450,
+                "avg_weight": 30,
+                "weight_multiplier": 25
+            },
+            "Piranha": {
+                "base_value": 450,
+                "avg_weight": 5,
+                "weight_multiplier": 45
+            },
+            "Electric Eel": {
+                "base_value": 750,
+                "avg_weight": 10,
+                "weight_multiplier": 30
+            }, 
+            "Great White Shark": {
+                "base_value": 1200,
+                "avg_weight": 600,
+                "weight_multiplier": 1.5
+            }
+        },
+        "Secret": {
+            "Rubber Ducky": {
+                "base_value": 2500,
+                "avg_weight": 1,
+                "weight_multiplier": 300
+            },
+            "Kraken": {
+                "base_value": 10000,
+                "avg_weight": 1000,
+                "weight_multiplier": 2
+            },
+            "Megalodon": {
+                "base_value": 750000,
+                "avg_weight": 50000,
+                "weight_multiplier": 2.5
+            },
+            "Loch Ness Monster": {
+                "base_value": 25000,
+                "avg_weight": 5000,
+                "weight_multiplier": 5
+            },
+            "Wallet": {
+                "base_value": 1200,
+                "avg_weight": 3,
+                "weight_multiplier": 2500
+            }
+        }
+    },
+    "rods":     {
+        "Common": {
+            "secret_chance": 0,
+            "chances": {
+                "common": 0.75,
+                "uncommon": 0.2,
+                "rare": 0.05,
+                "epic": 0,
+                "legendary": 0
+            }
+        },
+        "Uncommon": {
+            "secret_chance": 0.0001,
+            "chances": {
+                "common": 0.15,
+                "uncommon": 0.65,
+                "rare": 0.15,
+                "epic": 0.05,
+                "legendary": 0
+            }
+        },
+        "Rare": {
+            "secret_chance": 0.001,
+            "chances": {
+                "common": 0.05,
+                "uncommon": 0.15,
+                "rare": 0.6,
+                "epic": 0.15,
+                "legendary": 0.05
+            }
+        },
+        "Epic": {
+            "secret_chance": 0.005,
+            "chances": {
+                "common": 0.01,
+                "uncommon": 0.04,
+                "rare": 0.2,
+                "epic": 0.6,
+                "legendary": 0.15
+            }
+        },
+        "Legendary": {
+            "secret_chance": 0.05,
+            "chances": {
+                "common": 0.005,
+                "uncommon": 0.02,
+                "rare": 0.075,
+                "epic": 0.2,
+                "legendary": 0.7
+            }
+        },
+        "Secret": {
+            "secret_chance": 0.25,
+            "chances": {
+                "common": 0.001,
+                "uncommon": 0.009,
+                "rare": 0.015,
+                "epic": 0.075,
+                "legendary": 0.9
+            }
+        }
+    },
+    "upgrades": {
+        "rod_upgrade": {
+            "name": "Rod Upgrade",
+            "description": "Upgrades your rod to give you better chances at higher-tiered fish",
+            "max": 5,
+            "base_price": 100,
+            "price_multiplier": 15,
+            "base_value": 0,
+            "value_per_upgrade": 1
+        },
+        "luck": {
+            "name": "Luck",
+            "description": "Increases your chance of finding heavier fish",
+            "max": 50,
+            "base_price": 15,
+            "price_multiplier": 2.25,
+            "base_value": 0,
+            "value_per_upgrade": 0.01
+        },
+        "secret_luck": {
+            "name": "Secret Luck",
+            "description": "Increases your chance of finding secret fish",
+            "max": 25,
+            "base_price": 1250,
+            "price_multiplier": 2.5,
+            "base_value": 0,
+            "value_per_upgrade": 0.01
+        },
+        "time_to_catch": {
+            "name": "Time to Reel",
+            "description": "Increases the window of time you have to reel your rod",
+            "max": 50,
+            "base_price": 15,
+            "price_multiplier": 1.5,
+            "base_value": 1,
+            "value_per_upgrade": 0.2
+        },
+        "autoreel": {
+            "name": "Autoreel",
+            "description": "Automatically reel in your rod",
+            "max": 1,
+            "base_price": 750,
+            "price_multiplier": 0,
+            "base_value": 0,
+            "value_per_upgrade": 1
+        },
+        "average_bite_time": {
+            "name": "Average bite time",
+            "description": "Decreases the average amount of time before a fish bites",
+            "max": 10,
+            "base_price": 30,
+            "price_multiplier": 3.5,
+            "base_value": 20,
+            "value_per_upgrade": -1.5
+        },
+        "boat_size": {
+            "name": "Boat Size",
+            "description": "Carry more fish at once",
+            "max": 50,
+            "base_price": 15,
+            "price_multiplier": 2.25,
+            "base_value": 1,
+            "value_per_upgrade": 1 
+        },
+        "autocast": {
+            "name": "Autocast",
+            "description": "Automatically cast your rod",
+            "max": 1,
+            "base_price": 30000,
+            "price_multiplier": 0,
+            "base_value": 0,
+            "value_per_upgrade": 1
+        }
+    }
+}
