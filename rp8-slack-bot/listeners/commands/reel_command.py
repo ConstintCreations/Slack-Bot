@@ -31,37 +31,51 @@ def reel_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Res
 
             proportional_weight = weight/fish["avg_weight"]
             if proportional_weight <= 0.25:
-                fish_size = " Microscopic"
+                fish_size = "Microscopic"
             elif proportional_weight <= 0.5:
-                fish_size = " Tiny"
+                fish_size = "Tiny"
             elif proportional_weight <= 0.85:
-                fish_size = " Small"
+                fish_size = "Small"
             elif proportional_weight <= 1.15:
-                fish_size = "n Average"
+                fish_size = "Average"
             elif proportional_weight <= 1.5:
-                fish_size = " Large"
+                fish_size = "Large"
             elif proportional_weight <= 2:
-                fish_size = " Huge"
+                fish_size = "Huge"
             elif proportional_weight <= 3:
-                fish_size = " GIANT"
+                fish_size = "GIANT"
             elif proportional_weight <= 5:
-                fish_size = " MASSIVE"
+                fish_size = "MASSIVE"
             elif proportional_weight <= 7.5:
-                fish_size = " COLOSSAL"
+                fish_size = "COLOSSAL"
             elif proportional_weight <= 10:
-                fish_size = " BEGEMOTH"
+                fish_size = "BEGEMOTH"
             elif proportional_weight <= 25:
-                fish_size = " LEVIATHAN"
+                fish_size = "LEVIATHAN"
             else:
-                fish_size = "n ABYSSAL"
+                fish_size = "ABYSSAL"
 
             value = fish["base_value"] + fish["weight_multiplier"]*weight
             value = round(value, 1)
 
-            say(f"<@{user_id}> caught a{fish_size} {round_weight} lb. [{rarity.upper()}] {fish_name}! (${value})")
+            say(f"<@{user_id}> caught a{"n" if fish_size[0] == 'A' else ""} {fish_size} {round_weight} lb. [{rarity.upper()}] {fish_name}! (${value})")
+
+            fish_data = {
+                "rarity": rarity.upper(),
+                "name": fish_name,
+                "size": fish_size,
+                "weight": round_weight,
+                "value": value
+            }
+
+            data[user_id]["inventory"].append(fish_data)
+            data[user_id]["fish_caught"] = data[user_id]["fish_caught"] + 1
+            if not(data[user_id]["best_fish"].get("value")) or fish_data["value"] > data[user_id]["best_fish"]["value"]:
+               data[user_id]["best_fish"] = fish_data
 
             data[user_id]["casted"] = False
             data[user_id]["has_bite"] = False
+
         elif data[user_id].get("casted"):
             respond("Oops! it looks like you reeled in too early! Wait for a bite before you reel in.")
             data[user_id]["casted"] = False

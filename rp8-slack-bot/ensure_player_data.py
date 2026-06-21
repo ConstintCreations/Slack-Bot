@@ -18,7 +18,7 @@ def ensure_player_data():
                 for fish_name in fish_list:
                     base_fishdex[rarity][fish_name] = False
             data[user_id] = {
-                "cash": 0,
+                "money": 0,
                 "inventory": [],
                 "upgrades": base_upgrades,
                 "fish_caught": 0,

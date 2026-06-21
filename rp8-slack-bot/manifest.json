@@ -27,6 +27,11 @@
         "command": "/reel",
         "description": "Reel in your fish!",
         "should_escape": false
+      },
+      {
+        "command": "/sell",
+        "description": "Sell your haul!",
+        "should_escape": false
       }
     ]
   },
