@@ -4,16 +4,16 @@
     "minor_version": 1
   },
   "display_information": {
-    "name": "rp8-slack-bot"
+    "name": "Fishing Game"
   },
   "features": {
     "app_home": {
       "home_tab_enabled": true,
       "messages_tab_enabled": false,
-      "messages_tab_read_only_enabled": true
+      "messages_tab_read_only_enabled": false
     },
     "bot_user": {
-      "display_name": "rp8-slack-bot",
+      "display_name": "Fishing Game",
       "always_online": true
     },
     "shortcuts": [],
@@ -59,6 +59,7 @@
   "settings": {
     "event_subscriptions": {
       "bot_events": [
+        "app_home_opened"
       ]
     },
     "interactivity": {

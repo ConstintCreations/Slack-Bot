@@ -17,12 +17,9 @@ def buy_upgrade_action(ack: Ack, body: dict, client: WebClient, logger: Logger):
         owned = user["upgrades"][upgrade_key]
         max = definitions["upgrades"][upgrade_key]["max"]
 
-        bought = False
-
         if user["money"] >= int(price) and owned < max:
             user["money"] = user["money"] - int(price)
             user["upgrades"][upgrade_key] = user["upgrades"][upgrade_key] + 1
-            bought = True
             save_data(data)
 
         blocks = []
