@@ -1,15 +1,14 @@
 from slack_bolt import Ack
 from slack_sdk import WebClient
 from logging import Logger
-from data import save_data, load_data, DEFINITIONS
+from data import save_user, load_user, DEFINITIONS
 
 def buy_upgrade_action(ack: Ack, body: dict, client: WebClient, logger: Logger):
     try:
         ack()
         user_id = body["user"]["id"]
         view_id = body["view"]["id"]
-        data = load_data()
-        user = data[user_id]
+        user = load_user(user_id)
         definitions = DEFINITIONS
 
         upgrade_key, price = body["actions"][0]["value"].split("|")
@@ -20,7 +19,7 @@ def buy_upgrade_action(ack: Ack, body: dict, client: WebClient, logger: Logger):
         if user["money"] >= int(price) and owned < max:
             user["money"] = user["money"] - int(price)
             user["upgrades"][upgrade_key] = user["upgrades"][upgrade_key] + 1
-            save_data(data)
+            save_user(user_id, user)
 
         blocks = []
 

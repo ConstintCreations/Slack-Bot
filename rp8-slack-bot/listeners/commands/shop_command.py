@@ -2,14 +2,13 @@ from slack_bolt import Ack, Say, Respond
 from slack_sdk import WebClient
 from logging import Logger
 import time, threading, random
-from data import save_data, load_data, DEFINITIONS
+from data import save_user, load_user, DEFINITIONS
 
 def shop_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Respond, logger: Logger):
     try:
         ack()
         user_id = body["user_id"]
-        data = load_data()
-        user = data[user_id]
+        user = load_user(user_id)
         definitions = DEFINITIONS
 
         blocks = []
@@ -26,7 +25,6 @@ def shop_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Res
             blocks.append({"type": "divider"})
             blocks.append(upgrade_block)
 
-        data = load_data()
         client.views_open(
             trigger_id=body["trigger_id"],
             view={
@@ -36,7 +34,6 @@ def shop_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Res
                 "blocks": blocks
             }
         )
-        save_data(data)
 
     except Exception as e:
         logger.error(e)

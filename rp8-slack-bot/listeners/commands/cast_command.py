@@ -2,44 +2,43 @@ from slack_bolt import Ack, Say, Respond
 from slack_sdk import WebClient
 from logging import Logger
 import time, threading, random
-from data import save_data, load_data, DEFINITIONS
+from data import save_user, load_user, DEFINITIONS
 
 def cast_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Respond, logger: Logger):
     try:
         ack()
         user_id = body["user_id"]
 
-        data = load_data()
-        user_upgrades = data[user_id]["upgrades"]
+        user = load_user(user_id)
+        user_upgrades = user["upgrades"]
         definitions = DEFINITIONS
         upgrades = definitions["upgrades"]
 
-        if data[user_id].get("casted"):
+        if user.get("casted"):
             respond("Your line is already cast!")
             return
         
-        if len(data[user_id]["inventory"]) >= user_upgrades["boat_size"] * upgrades["boat_size"]["value_per_upgrade"] + 1:
+        if len(user["inventory"]) >= user_upgrades["boat_size"] * upgrades["boat_size"]["value_per_upgrade"] + 1:
             respond("It looks like your boat is already full of fish! Sell your haul or increase your boat size to continue casting.")
             return
         
         respond("You cast your line...")
 
-        data[user_id]["casted"] = True
+        user["casted"] = True
 
-        save_data(data)
+        save_user(user_id, user)
 
         def delay_bite():
             definitions = DEFINITIONS
             upgrades = definitions["upgrades"]
             time.sleep(random.gauss(25 - user_upgrades["average_bite_time"] * upgrades["average_bite_time"]["value_per_upgrade"], (25 - (user_upgrades["average_bite_time"] * upgrades["average_bite_time"]["value_per_upgrade"]))/4))
 
-            data = load_data()
-            user = data.get(user_id, {})
+            user = load_user(user_id)
 
             if not user.get("casted"):
                 return
             
-            data[user_id]["has_bite"] = True
+            user["has_bite"] = True
             
             if user_upgrades["autoreel"] > 0:
                 definitions = DEFINITIONS
@@ -95,49 +94,49 @@ def cast_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Res
                     "value": value
                 }
 
-                if not(data[user_id]["best_fish"].get("value")) or fish_data["value"] > data[user_id]["best_fish"]["value"]:
-                    data[user_id]["best_fish"] = fish_data
+                if not(user["best_fish"].get("value")) or fish_data["value"] > user["best_fish"]["value"]:
+                    user["best_fish"] = fish_data
                     message = client.chat_postMessage(channel = body["channel_id"], text=f"NEW BEST! <@{user_id}> caught a{"n" if fish_size[0] == 'A' else ""} {fish_size} {round_weight} lb. [{rarity.upper()}] {fish_name}! (${value})")
                     client.reactions_add(channel=body["channel_id"], timestamp=message["ts"], name="trophy")
                 else:
                     respond(f"AUTOREEL! You caught a{"n" if fish_size[0] == 'A' else ""} {fish_size} {round_weight} lb. [{rarity.upper()}] {fish_name}! (${value})")
 
-                data[user_id]["inventory"].append(fish_data)
-                data[user_id]["fish_caught"] = data[user_id]["fish_caught"] + 1
-                data[user_id]["fishdex"][rarity][fish_name] = True
+                user["inventory"].append(fish_data)
+                user["fish_caught"] = user["fish_caught"] + 1
+                user["fishdex"][rarity][fish_name] = True
 
-                data[user_id]["casted"] = False
-                data[user_id]["has_bite"] = False
-                save_data(data)
+                user["casted"] = False
+                user["has_bite"] = False
+                save_user(user_id, user)
             else:
                 if random.random() > 0.5:
                     respond("A fish is tugging at your line! Reel it in!")
                 else:
                     respond("A fish is biting! Reel it in!")
-                save_data(data)
+                save_user(user_id, user)
 
                 time.sleep(random.gauss(1.5 + user_upgrades["time_to_catch"] * upgrades["time_to_catch"]["value_per_upgrade"], (1.5 + user_upgrades["time_to_catch"] * upgrades["time_to_catch"]["value_per_upgrade"])/8))
-                data = load_data()
-                if data[user_id]["has_bite"]:
+                user = load_user(user_id)
+                if user["has_bite"]:
                     respond("The fish got away!")
-                    data[user_id]["casted"] = False
-                    data[user_id]["has_bite"] = False
-                    save_data(data)
+                    user["casted"] = False
+                    user["has_bite"] = False
+                    save_user(user_id, user)
                     
             if user_upgrades["autosell"] > 0:
-                    if len(data[user_id]["inventory"]) == user_upgrades["boat_size"]+1:
+                    if len(user["inventory"]) == user_upgrades["boat_size"]+1:
                         message = "AUTOSELL! Sold:\n"
                         total = 0
-                        for fish in data[user_id]["inventory"]:
+                        for fish in user["inventory"]:
                             message += f"    {fish["size"]} {fish["weight"]} lb. [{fish["rarity"]}] {fish["name"]} = ${fish["value"]}\n"
                             total += fish["value"]
                         total = round(total, 1)
-                        message += f"For a total of ${total}! You now have ${data[user_id]["money"] + total}"
+                        message += f"For a total of ${total}! You now have ${user["money"] + total}"
                         respond(message)
 
-                        data[user_id]["money"] = data[user_id]["money"] + total
-                        data[user_id]["inventory"] = []
-            save_data(data)
+                        user["money"] = user["money"] + total
+                        user["inventory"] = []
+            save_user(user_id, user)
 
         threading.Thread(target=delay_bite).start()
 

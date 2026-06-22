@@ -2,13 +2,13 @@ from slack_bolt import Ack, Say, Respond
 from slack_sdk import WebClient
 from logging import Logger
 import time, threading, random
-from data import save_data, load_data
+from data import _load_data
 
 def fishdex_command(ack: Ack, body: dict, client: WebClient, say: Say, respond: Respond, logger: Logger):
     try:
         ack()
         user_id = body["user_id"]
-        data = load_data()
+        data = _load_data()
 
         text = body["text"].strip()
         if text == "":

@@ -1,4 +1,4 @@
-from data import save_data, load_data, DEFINITIONS
+from data import load_user, save_user, DEFINITIONS
 
 def ensure_player_data():
     def middleware(context, body, next, logger):
@@ -8,8 +8,9 @@ def ensure_player_data():
         if not user_id:
             return next()
 
-        data = load_data()
-        if user_id not in data:
+        user = load_user(user_id)
+
+        if not user:
             base_upgrades = {}
             for name, upgrade in DEFINITIONS["upgrades"].items():
                 base_upgrades[name] = upgrade["base_value"]
@@ -18,7 +19,7 @@ def ensure_player_data():
                 base_fishdex[rarity] = {}
                 for fish_name in fish_list:
                     base_fishdex[rarity][fish_name] = False
-            data[user_id] = {
+            user = {
                 "username": username,
                 "money": 0,
                 "inventory": [],
@@ -30,7 +31,7 @@ def ensure_player_data():
                 "fishdex": base_fishdex
             }
 
-            save_data(data)
+            save_user(user_id, user)
 
         return next()
 

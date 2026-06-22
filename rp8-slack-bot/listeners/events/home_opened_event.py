@@ -1,13 +1,11 @@
-from slack_bolt import Ack
 from slack_sdk import WebClient
 from logging import Logger
-from data import save_data, load_data, DEFINITIONS
+from data import load_user
 
 def home_opened_event(event, client: WebClient, logger: Logger):
     try:
         user_id = event["user"]
-        data = load_data()
-        user = data[user_id]
+        user = load_user(user_id)
         
         money = user["money"]
         fish_caught = user["fish_caught"]
