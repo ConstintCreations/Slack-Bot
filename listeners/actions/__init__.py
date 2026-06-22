@@ -1,6 +1,5 @@
 from slack_bolt import App
-from .sample_action import sample_action_callback
-
+from .buy_upgrade_action import buy_upgrade_action
 
 def register(app: App):
-    app.action("sample_action_id")(sample_action_callback)
+    app.action("buy_upgrade")(buy_upgrade_action)
