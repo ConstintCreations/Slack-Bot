@@ -6,7 +6,7 @@ Fishing Game is a Slack-based incremental fishing game where players cast, reel,
 
 ## Commands
 - /cast | Casts your rod
-- /reel | Reels in your rod
+- /reel | Reels in your rod | Tip: Type this before a fish tugs at your line and only hit enter once it does.
 - /sell | Sells your fish
 - /shop | Opens the shop
 - /fishdex [User] | See what fish you, or another user have caught
